@@ -1,4 +1,5 @@
-import apiClient from "@/api/apiClient";
+"use client";
+
 import React from "react";
 
 export default function Dashboard() {

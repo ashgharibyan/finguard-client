@@ -6,10 +6,7 @@ interface SignInResponse {
 }
 
 interface SignUpResponse {
-  id: number;
-  username: string;
-  email: string;
-  expenses: any[]; // Adjust type if the structure of `expenses` is known
+  token: string;
 }
 
 export const signIn = async (
@@ -35,16 +32,15 @@ export const signUp = async (
   username: string,
 ): Promise<SignUpResponse> => {
   // Register the user
-  const signUpData = await postApiCall<SignUpResponse>("/Users", {
+  const data = await postApiCall<SignUpResponse>("/Users/register", {
     email,
     password,
     username,
   });
 
-  // Automatically log in the user after signing up
-  const signInResponse = await signIn(email, password);
+  if (data.token) {
+    await login(data.token);
+  }
 
-  return {
-    ...signUpData,
-  };
+  return data;
 };
