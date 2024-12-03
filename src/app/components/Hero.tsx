@@ -8,7 +8,7 @@ export default function Hero() {
         FinGuard helps you manage your finances with ease and confidence.
       </p>
       <a
-        href="#contact"
+        href="/sign-up"
         className="px-8 py-3 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
       >
         Get Started

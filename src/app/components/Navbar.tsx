@@ -5,16 +5,6 @@ export default function Navbar() {
         <h1 className="text-2xl font-bold">FinGuard</h1>
         <ul className="flex space-x-4">
           <li>
-            <a href="#features" className="hover:text-gray-300">
-              Features
-            </a>
-          </li>
-          <li>
-            <a href="#contact" className="hover:text-gray-300">
-              Contact
-            </a>
-          </li>
-          <li>
             <a href="/sign-in" className="hover:text-gray-300">
               Log In
             </a>

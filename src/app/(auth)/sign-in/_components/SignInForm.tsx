@@ -57,8 +57,6 @@ export function SignInForm() {
         } else {
           setError("User not found");
         }
-      } else {
-        setError("An unexpected error occurred. Please Try Again.");
       }
     },
   });

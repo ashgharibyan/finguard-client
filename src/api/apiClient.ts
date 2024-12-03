@@ -39,12 +39,16 @@ apiClient.interceptors.request.use(
 
 apiClient.interceptors.response.use(
   (response) => response,
-  (error) => {
+  async (error) => {
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          console.error("Unauthorized access - redirecting to sign-in");
-          redirect("/sign-in");
+          // Only redirect if we're not already on the sign-in page
+          if (window.location.pathname !== "/sign-in") {
+            console.error("Unauthorized access - redirecting to sign-in");
+            window.location.href = "/sign-in";
+          }
+          break;
 
         case 500:
           console.error("Server error. Please try again later.");

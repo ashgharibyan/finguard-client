@@ -3,7 +3,7 @@ export interface ExpenseType {
   id: number; // Expense ID
   description: string; // Description of the expense
   amount: number; // Expense amount
-  date: string; // Date of the expense (ISO 8601 formatted string)
+  date: Date; // Date of the expense (ISO 8601 formatted string)
 }
 
 // User type for frontend use

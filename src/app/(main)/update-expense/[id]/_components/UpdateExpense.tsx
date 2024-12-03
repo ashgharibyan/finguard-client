@@ -2,89 +2,84 @@
 
 import React, { useState } from "react";
 import { Button, TextInput, NumberInput, Title, Group } from "@mantine/core";
-import axios from "axios";
 import { DatePicker } from "@mantine/dates";
-import { UserType } from "@/types/types";
-import { useMutation } from "@tanstack/react-query";
-import { createExpense, CreateExpenseBody } from "@/api/expenseApi";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { CreateExpenseBody, updateExpense } from "@/api/expenseApi";
+import { ExpenseType, UserType } from "@/types/types";
 import { notifications } from "@mantine/notifications";
 
-interface AddExpenseProps {
+interface UpdateExpenseProps {
   user: UserType;
+  expense: ExpenseType;
 }
 
-export default function AddExpense({ user }: AddExpenseProps) {
-  const [description, setDescription] = useState("");
-  const [amount, setAmount] = useState<number>(0);
-  const [date, setDate] = useState<Date | null>(new Date());
-  const [loading, setLoading] = useState(false);
+export default function UpdateExpense({ user, expense }: UpdateExpenseProps) {
   const router = useRouter();
 
-  const create = useMutation({
-    mutationFn: (expense: CreateExpenseBody) => createExpense(expense),
-    mutationKey: ["createExpense"],
+  // Initialize form fields with the passed expense
+  const [description, setDescription] = useState(expense.description);
+  const [amount, setAmount] = useState<number>(expense.amount);
+  const [date, setDate] = useState<Date | null>(new Date(expense.date));
+
+  const update = useMutation({
+    mutationFn: (updatedExpense: Partial<CreateExpenseBody>) =>
+      updateExpense(expense.id, updatedExpense),
+    mutationKey: ["updateExpense", expense.id],
     onSuccess: () => {
       notifications.show({
         title: "Success",
-        message: "Expense created successfully",
+        message: "Expense updated successfully",
         color: "green",
       });
       router.push("/dashboard");
-      console.log("Successfully created Expense");
-      setLoading(false);
+      console.log("Successfully updated expense");
     },
     onError: () => {
       notifications.show({
         title: "Error",
-        message: "Error creating an expense",
+        message: "Error updating expense",
         color: "red",
       });
-      console.error("error creating Expense");
-      alert("Error creating expense, please try again");
-      setLoading(false);
+      console.error("Error updating expense");
+      alert("Error updating expense, please try again.");
     },
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
-    console.log(description, amount, date);
     if (!description || !amount || !date) {
       alert("Please fill in all required fields.");
-      setLoading(false);
-
       return;
     }
 
     if (amount <= 0.01) {
       alert("Amount must be greater than 0");
-      setLoading(false);
-
       return;
     }
 
-    console.log(description, amount, date);
-
-    const expense = {
-      description: description,
-      amount: amount,
+    const updatedExpense = {
+      description,
+      amount,
       date: date,
-      userId: user.id,
     };
 
-    create.mutate(expense);
-
-    setLoading(false);
+    update.mutate(updatedExpense);
   };
 
   return (
     <div className="flex flex-col items-center p-6 min-h-screen bg-gray-50">
       {/* Page Header */}
-      <Button onClick={() => router.push("/dashboard")}>Back</Button>
+      <Button
+        onClick={() => router.push("/dashboard")}
+        variant="subtle"
+        className="mb-4"
+      >
+        Back
+      </Button>
       <Title order={2} className="mb-6">
-        Add New Expense
+        Update Expense
       </Title>
 
       {/* Expense Form */}
@@ -104,9 +99,7 @@ export default function AddExpense({ user }: AddExpenseProps) {
           label="Amount"
           placeholder="Enter expense amount"
           value={amount}
-          // Use a type-safe onChange handler
           onChange={(value: number | string) => {
-            // Ensure we only set numeric values
             const numValue =
               typeof value === "string" ? parseFloat(value) : value;
             setAmount(isNaN(numValue) ? 0 : numValue);
@@ -118,8 +111,8 @@ export default function AddExpense({ user }: AddExpenseProps) {
         <DatePicker value={date} onChange={setDate} />
 
         <Group>
-          <Button type="submit" color="blue" loading={loading}>
-            Add Expense
+          <Button type="submit" color="blue" loading={update.isPending}>
+            Update Expense
           </Button>
         </Group>
       </form>

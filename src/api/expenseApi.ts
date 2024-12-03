@@ -1,5 +1,4 @@
-import { login } from "@/utils/authService";
-import { getApiCall, postApiCall } from "./apiUtils";
+import { getApiCall, postApiCall, putApiCall, deleteApiCall } from "./apiUtils";
 
 interface CreateExpenseResponse {
   id: number;
@@ -14,10 +13,35 @@ export interface CreateExpenseBody {
   userId: number;
 }
 
+// Create Expense
 export const createExpense = async (
   expense: CreateExpenseBody,
 ): Promise<CreateExpenseResponse> => {
   const data = await postApiCall<CreateExpenseResponse>("/Expenses", expense);
+  return data;
+};
 
+// Update Expense
+export const updateExpense = async (
+  id: number,
+  expense: Partial<CreateExpenseBody>, // Allow partial updates
+): Promise<CreateExpenseResponse> => {
+  const data = await putApiCall<CreateExpenseResponse>(
+    `/Expenses/${id}`,
+    expense,
+  );
+  return data;
+};
+
+// Delete Expense
+export const deleteExpense = async (id: number): Promise<void> => {
+  await deleteApiCall<void>(`/Expenses/${id}`);
+};
+
+// Get Expense
+export const getExpense = async (
+  id: number,
+): Promise<CreateExpenseResponse> => {
+  const data = await getApiCall<CreateExpenseResponse>(`/Expenses/${id}`);
   return data;
 };

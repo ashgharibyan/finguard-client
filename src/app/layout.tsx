@@ -4,9 +4,10 @@ import "./globals.css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { theme } from "./theme";
 import { QueryProvider } from "@/utils/QueryProvider";
+import { Notifications } from "@mantine/notifications";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,7 +35,10 @@ export default function RootLayout({
       <head></head>
       <body>
         <QueryProvider>
-          <MantineProvider theme={theme}>{children}</MantineProvider>
+          <MantineProvider theme={theme}>
+            <Notifications position="top-right" />
+            {children}
+          </MantineProvider>
         </QueryProvider>
       </body>
     </html>
