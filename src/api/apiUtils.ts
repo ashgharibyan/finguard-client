@@ -6,7 +6,7 @@ export const getApiCall = async <T = unknown>(
   params = {},
 ): Promise<T> => {
   const response = await apiClient.get(endpoint, { params });
-  console.log(`GET request to ${endpoint} successful:`);
+  console.log(`GET request to ${endpoint} successful:`), response.data;
   return response.data as T;
 };
 

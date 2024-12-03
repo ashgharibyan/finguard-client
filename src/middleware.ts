@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { loggedIn } from "./utils/authService";
+import { loggedIn, logout } from "./utils/authService";
 
 const signInRoutes = ["/", "/sign-in", "/sign-up"];
 const apiPrefix = "/api";
@@ -14,10 +14,9 @@ export async function middleware(request: NextRequest) {
 
   // if the session is expired delete the cookie and redirect to homepage
   if (expired) {
+    await logout();
     if (!isSignInRoute && !isApiAuthRoute && !isServicesRoute) {
-      return NextResponse.redirect(
-        new URL("/services/auth/logout", request.url),
-      );
+      return NextResponse.redirect(new URL("/", request.url));
     }
   }
 

@@ -17,10 +17,10 @@ export async function getProfile() {
    * It relies on the getToken method to fetch the token from local storage.
    */
 
-  const token: RequestCookie | undefined = await getToken();
+  const token: string | undefined = await getToken();
 
   if (token) {
-    const userId = jwtDecode(token.value);
+    const userId = jwtDecode(token);
     return userId;
   } else {
     return null;
@@ -70,7 +70,7 @@ export async function getToken() {
    */
 
   const session = (await cookies()).get("session");
-  return session;
+  return session?.value;
 }
 
 export async function login(idToken: string) {
@@ -101,5 +101,5 @@ export async function logout() {
   if (session) {
     (await cookies()).delete("session");
   }
-  redirect("/");
+  return { success: true };
 }

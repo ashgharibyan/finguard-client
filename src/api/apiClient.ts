@@ -21,7 +21,7 @@ apiClient.interceptors.request.use(
   async (config) => {
     try {
       // Retrieve the token from SecureStore
-      const token = getToken();
+      const token = await getToken();
 
       if (token) {
         // Add the token to the Authorization header with "Token" scheme
@@ -43,10 +43,9 @@ apiClient.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          console.error(
-            "Unauthorized access - possible invalid or expired token.",
-          );
-          redirect("/(auth)/sign-in");
+          console.error("Unauthorized access - redirecting to sign-in");
+          redirect("/sign-in");
+
         case 500:
           console.error("Server error. Please try again later.");
           break;
