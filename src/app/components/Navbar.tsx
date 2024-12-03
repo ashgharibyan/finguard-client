@@ -15,7 +15,7 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#contact" className="hover:text-gray-300">
+            <a href="/sign-in" className="hover:text-gray-300">
               Log In
             </a>
           </li>
