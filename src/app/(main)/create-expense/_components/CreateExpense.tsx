@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import { Button, TextInput, NumberInput, Title, Group } from "@mantine/core";
-import axios from "axios";
 import { DatePicker } from "@mantine/dates";
 import { UserType } from "@/types/types";
 import { useMutation } from "@tanstack/react-query";

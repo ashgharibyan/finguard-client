@@ -1,4 +1,3 @@
-import { login } from "@/utils/authService";
 import { getApiCall, postApiCall } from "./apiUtils";
 
 interface GetUserResponse {

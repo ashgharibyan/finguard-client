@@ -1,6 +1,4 @@
-import apiClient from "@/api/apiClient";
 import React from "react";
-import Dashboard from "./_components/CreateExpense";
 import CreateExpense from "./_components/CreateExpense";
 import { getUser } from "@/api/userApi";
 

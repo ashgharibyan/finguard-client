@@ -17,7 +17,6 @@ interface UpdateExpenseProps {
 export default function UpdateExpense({ user, expense }: UpdateExpenseProps) {
   const router = useRouter();
 
-  // Initialize form fields with the passed expense
   const [description, setDescription] = useState(expense.description);
   const [amount, setAmount] = useState<number>(expense.amount);
   const [date, setDate] = useState<Date | null>(new Date(expense.date));

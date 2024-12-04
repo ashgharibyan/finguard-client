@@ -1,13 +1,9 @@
 import { getToken } from "@/utils/authService";
 import axios from "axios";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-
-// Narek House
-// const baseURL = "http://192.168.6.126:8000/api";
 
 // Base URL configuration based on environment or platform
-const baseURL = "http://localhost:5064/api";
+const baseURL =
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5064/api";
 
 // Create the Axios instance with the base URL and default headers
 const apiClient = axios.create({
@@ -20,11 +16,9 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   async (config) => {
     try {
-      // Retrieve the token from SecureStore
       const token = await getToken();
 
       if (token) {
-        // Add the token to the Authorization header with "Token" scheme
         config.headers.Authorization = `Bearer ${token}`;
       }
     } catch (error) {
@@ -43,7 +37,6 @@ apiClient.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          // Only redirect if we're not already on the sign-in page
           if (window.location.pathname !== "/sign-in") {
             console.error("Unauthorized access - redirecting to sign-in");
             window.location.href = "/sign-in";
