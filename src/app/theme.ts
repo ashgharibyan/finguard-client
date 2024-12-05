@@ -62,7 +62,6 @@ export const theme = createTheme({
     terniary: terniaryColors,
     backgroundGray: backgroundGray,
   },
-
   breakpoints: {
     xs: "30em",
     sm: "48em",
