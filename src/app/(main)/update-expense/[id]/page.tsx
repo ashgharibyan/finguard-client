@@ -3,6 +3,9 @@ import { getExpense } from "@/api/expenseApi";
 import { getUser } from "@/api/userApi";
 import UpdateExpense from "./_components/UpdateExpense";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function Page({
   params,
 }: {
