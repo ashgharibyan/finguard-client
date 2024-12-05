@@ -14,7 +14,7 @@ interface UpdateExpenseProps {
   expense: ExpenseType;
 }
 
-export default function UpdateExpense({ user, expense }: UpdateExpenseProps) {
+export default function UpdateExpense({ expense }: UpdateExpenseProps) {
   const router = useRouter();
 
   const [description, setDescription] = useState(expense.description);

@@ -2,15 +2,7 @@
 
 import React from "react";
 import { UserType } from "@/types/types";
-import {
-  Avatar,
-  Button,
-  Group,
-  TextInput,
-  Title,
-  Text,
-  Divider,
-} from "@mantine/core";
+import { Avatar, Button, TextInput, Title, Text, Divider } from "@mantine/core";
 import { useRouter } from "next/navigation";
 
 interface ProfileProps {

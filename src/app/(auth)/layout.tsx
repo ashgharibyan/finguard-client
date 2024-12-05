@@ -1,4 +1,4 @@
-import { Box, Center, Stack } from "@mantine/core";
+import { Center, Stack } from "@mantine/core";
 import React from "react";
 import Footer from "./_components/Footer";
 

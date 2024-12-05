@@ -1,10 +1,11 @@
-import { getApiCall, postApiCall } from "./apiUtils";
+import { ExpenseType } from "@/types/types";
+import { getApiCall } from "./apiUtils";
 
 interface GetUserResponse {
   id: number;
   username: string;
   email: string;
-  expenses: any[];
+  expenses: ExpenseType[];
 }
 
 export const getUser = async (): Promise<GetUserResponse> => {

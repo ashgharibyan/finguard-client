@@ -1,6 +1,6 @@
 "use client";
 
-import { Anchor, Group, Image, Text } from "@mantine/core";
+import { Anchor, Group, Text } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
 

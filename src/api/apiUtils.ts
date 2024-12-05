@@ -6,16 +6,16 @@ export const getApiCall = async <T = unknown>(
   params = {},
 ): Promise<T> => {
   const response = await apiClient.get(endpoint, { params });
-  console.log(`GET request to ${endpoint} successful:`), response.data;
+  console.log(`GET request to ${endpoint} successful:`);
   return response.data as T;
 };
 
 // POST request
 export const postApiCall = async <T = unknown>(
   endpoint: string,
-  data = {},
+  params = {},
 ): Promise<T> => {
-  const response = await apiClient.post(endpoint, data);
+  const response = await apiClient.post(endpoint, { params });
   console.log(`POST request to ${endpoint} successful:`);
   return response.data as T;
 };
