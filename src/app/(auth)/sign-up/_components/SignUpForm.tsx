@@ -17,6 +17,7 @@ import { useForm, zodResolver } from "@mantine/form";
 import { IconInfoCircle } from "@tabler/icons-react";
 import { AxiosError } from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type SignUpForn = {
@@ -28,6 +29,7 @@ type SignUpForn = {
 export function SignUpForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm<SignUpForn>({
     mode: "uncontrolled",
@@ -47,7 +49,7 @@ export function SignUpForm() {
 
     try {
       await signUp(formValues.email, formValues.password, formValues.username);
-
+      router.push("/dashboard");
       setLoading(false);
     } catch (err) {
       setLoading(false);

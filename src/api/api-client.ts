@@ -47,7 +47,7 @@ apiClient.interceptors.response.use(
 );
 
 // Server-side fetch wrapper
-export default async function serverFetch<T>(
+export async function serverFetch<T>(
   endpoint: string,
   options: RequestInit = {},
 ): Promise<T> {

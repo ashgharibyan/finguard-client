@@ -1,5 +1,5 @@
 import { ExpenseType } from "@/types/types";
-import serverFetch from "./api-client";
+import { serverFetch } from "./api-client";
 
 interface GetUserResponse {
   id: number;

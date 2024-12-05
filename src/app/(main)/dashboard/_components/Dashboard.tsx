@@ -52,22 +52,21 @@ export default function Dashboard({ user }: DashboardProps) {
 
   const handleLogout = async () => {
     try {
-      // First clear the token from the API client
+      // Clear the client-side auth header
       apiClient.defaults.headers.common["Authorization"] = "";
 
-      // Then call the logout service
-      const response = await logout();
+      // Clear the cookie using client-side JavaScript
+      document.cookie =
+        "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
-      if (response.success) {
-        notifications.show({
-          title: "Success",
-          message: "Logged out successfully",
-          color: "green",
-        });
+      notifications.show({
+        title: "Success",
+        message: "Logged out successfully",
+        color: "green",
+      });
 
-        // Use replace instead of push to prevent back navigation
-        router.replace("/sign-in");
-      }
+      // Use window.location.href for a full page refresh
+      window.location.href = "/sign-in";
     } catch (error) {
       console.error("Logout error:", error);
       notifications.show({
