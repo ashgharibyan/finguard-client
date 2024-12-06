@@ -18,7 +18,6 @@ export const signIn = async (
     password,
   });
 
-  // Set session cookie
   if (data.token) {
     await login(data.token);
   }
