@@ -98,6 +98,16 @@ export default function Dashboard({ user }: DashboardProps) {
                 Dashboard
               </Button>
             </li>
+            <li>
+              <Button
+                variant="subtle"
+                fullWidth
+                className="text-left px-6 py-2 text-white hover:bg-gray-800"
+                onClick={() => router.push("/all")}
+              >
+                All Expenses
+              </Button>
+            </li>
           </ul>
         </nav>
         <div className="p-6">

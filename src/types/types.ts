@@ -13,3 +13,16 @@ export interface UserType {
   email: string; // Email of the user
   expenses: ExpenseType[]; // Array of user's expenses
 }
+
+export interface EnhancedExpenseType {
+  id: number;
+  description: string;
+  amount: number;
+  date: Date;
+  createdBy: string;
+  createdAt: Date;
+}
+
+export interface AllExpensesResponse {
+  expenses: EnhancedExpenseType[];
+}

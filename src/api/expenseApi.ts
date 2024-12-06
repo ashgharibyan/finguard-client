@@ -1,3 +1,4 @@
+import { EnhancedExpenseType } from "@/types/types";
 import { getApiCall, postApiCall, putApiCall, deleteApiCall } from "./apiUtils";
 
 interface CreateExpenseResponse {
@@ -43,5 +44,10 @@ export const getExpense = async (
   id: number,
 ): Promise<CreateExpenseResponse> => {
   const data = await getApiCall<CreateExpenseResponse>(`/Expenses/${id}`);
+  return data;
+};
+
+export const getAllExpenses = async (): Promise<EnhancedExpenseType[]> => {
+  const data = await getApiCall<EnhancedExpenseType[]>("/Expenses");
   return data;
 };

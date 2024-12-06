@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Base URL configuration based on environment or platform
 const baseURL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5064/api";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://0.0.0.0:8080/api";
 
 // Create the Axios instance with the base URL and default headers
 const apiClient = axios.create({
