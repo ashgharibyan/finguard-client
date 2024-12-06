@@ -113,9 +113,6 @@ export function SignInForm() {
             {...form.getInputProps("password")}
           />
 
-          <Group justify="space-between" mt="lg">
-            <Checkbox label="Remember me" />
-          </Group>
           <Button
             type="submit"
             loading={loginMutation.isPending}
